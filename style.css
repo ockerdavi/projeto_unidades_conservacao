@@ -1,0 +1,565 @@
+/* Reset & Estilos Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f6f8;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Cabeçalho de Navegação */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-box {
+    background-color: #003366;
+    color: white;
+    padding: 8px 15px;
+    font-weight: bold;
+    font-size: 22px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+}
+
+.logo-text {
+    font-size: 11px;
+    color: #555;
+    line-height: 1.3;
+    font-weight: 600;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-primary {
+    background-color: #6a9c8f;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #557f74;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid #6a9c8f;
+    color: #6a9c8f;
+}
+
+.btn-outline:hover {
+    background-color: #6a9c8f;
+    color: white;
+}
+
+
+main {
+    max-width: 1200px;
+    width: 100%;
+    margin: 30px auto;
+    padding: 0 20px;
+    flex-grow: 1;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 40px;
+    color: #222;
+    font-weight: 700;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+    align-items: stretch; 
+}
+
+
+.card-img {
+    width: 200px;
+    min-width: 100%;
+    height: 400px; 
+    object-fit: cover; 
+    object-position: center; 
+    background-color: #e2e8f0; 
+    border-bottom: 3px solid #6a9c8f; 
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.card-title {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 15px;
+    text-align: center;
+    color: #222;
+    background: #fff;
+}
+
+.card-content {
+    background-color: #6a766c;
+    color: white;
+    padding: 20px;
+    font-size: 11.5px;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.card-content p {
+    margin-bottom: 10px;
+}
+
+.card-content strong {
+    color: #e2e8f0;
+}
+
+.card-footer {
+    padding: 15px;
+    text-align: center;
+    background-color: #ffffff;
+    margin-top: auto;
+}
+
+.btn-ouvidoria {
+    display: inline-block;
+    width: 85%;
+    padding: 8px 0;
+    background-color: white;
+    color: #6a9c8f;
+    border: 2px solid #6a9c8f;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.btn-ouvidoria:hover {
+    background-color: #6a9c8f;
+    color: white;
+}
+
+/*TELA 2*/
+.details-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.info-panel {
+    background: white;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.info-panel h2 {
+    color: #003366;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.info-panel .uc-desc {
+    font-size: 14px;
+    color: #4b5563;
+    margin-bottom: 20px;
+}
+
+.spec-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.spec-table td {
+    padding: 12px 0;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 14px;
+}
+
+.spec-table td strong {
+    color: #1f2937;
+}
+
+/* Painel de Ouvidoria */
+.ouvidoria-panel {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    overflow: hidden;
+    border: 1px solid #d1d5db;
+}
+
+.ouvidoria-header {
+    background-color: #2f3e46;
+    color: white;
+    padding: 15px 20px;
+}
+
+.ouvidoria-header h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.select-uc {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+    background: white;
+    font-size: 13.5px;
+    color: #333;
+}
+
+.ouvidoria-body {
+    padding: 20px;
+}
+
+.action-box {
+    margin-bottom: 20px;
+}
+
+.history-title {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: #374151;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 5px;
+}
+
+.communication-item {
+    background-color: #fef3c7;
+    border: 1px solid #fde68a;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.communication-item.sugestao {
+    background-color: #ecfdf5;
+    border: 1px solid #a7f3d0;
+}
+
+.item-header {
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 4px;
+}
+
+.item-date {
+    font-size: 11px;
+    color: #6b7280;
+    font-weight: normal;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.item-desc {
+    color: #4b5563;
+    margin-top: 4px;
+}
+
+/* --- TELA 3: FORMULÁRIO DE ENVIO --- */
+.form-container {
+    background: white;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-top: 4px solid #6a9c8f;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #374151;
+    font-size: 14px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14.5px;
+    background-color: #fff;
+    transition: border-color 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #6a9c8f;
+    box-shadow: 0 0 0 3px rgba(106, 156, 143, 0.15);
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 125px;
+}
+
+.form-actions {
+    text-align: right;
+    margin-top: 25px;
+}
+
+.btn-submit {
+    background-color: #6a9c8f;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.2s;
+}
+
+.btn-submit:hover {
+    background-color: #557f74;
+}
+
+
+footer.academic-footer {
+    background-color: #1e293b;
+    color: #94a3b8;
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    margin-top: auto;
+    border-top: 3px solid #6a9c8f;
+}
+
+footer.academic-footer .univali-tag {
+    font-weight: bold;
+    color: #ffffff;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+/* tELA DE OUVIDORIA  */
+
+.main-ouvidoria {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+
+.banner-ouvidoria {
+    background-color: #4a4a4a;
+    color: white;
+    border-radius: 12px;
+    padding: 20px 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.banner-ouvidoria h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.seletor-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+}
+
+.select-banner {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+.colunas-ouvidoria {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+}
+
+.colunas-ouvidoria h3 {
+    font-size: 18px;
+    color: #222;
+    margin-bottom: 25px;
+}
+
+
+.form-group-inline {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group-inline.align-top {
+    align-items: flex-start;
+}
+
+.form-group-inline label {
+    width: 160px;
+    font-size: 14px;
+    color: #000;
+    font-weight: bold;
+}
+
+.form-group-inline input,
+.form-group-inline textarea {
+    flex-grow: 1;
+    background-color: #f4f8e6;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+}
+
+.form-group-inline textarea {
+    height: 120px;
+    resize: none;
+}
+
+.form-actions-right {
+    text-align: right;
+    margin-top: 15px;
+}
+
+.btn-outline-rounded {
+    background: transparent;
+    border: 1px solid #999;
+    padding: 6px 30px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #333;
+    transition: background 0.2s;
+}
+
+.btn-outline-rounded:hover {
+    background: #e2e8f0;
+}
+
+/* Cards do Histórico */
+.historico-card {
+    background-color: #f4f8e6;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.historico-card-titulo {
+    font-weight: bold;
+    color: #000;
+    font-size: 14px;
+}
+
+.historico-card-data {
+    font-size: 11px;
+    color: #555;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.historico-card-desc {
+    font-size: 13px;
+    color: #333;
+    line-height: 1.4;
+}
+
+/*OUVIDORIA*/
+.card-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 4px;
+}
+
+.badge-status {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+.status-0 {
+    background-color: #fef08a; 
+    color: #854d0e; 
+    border: 1px solid #fde047;
+}
+
+
+.status-1 {
+    background-color: #bbf7d0; 
+    color: #166534; /* Texto verde escuro */
+    border: 1px solid #86efac;
+}

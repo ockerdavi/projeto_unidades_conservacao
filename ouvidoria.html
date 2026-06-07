@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMA - Ouvidoria</title>
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo-container" style="text-decoration: none; color: inherit;">
+            <div class="logo-box">IMA</div>
+            <div class="logo-text">Instituto do Meio Ambiente<br>de Santa Catarina</div>
+        </a>
+        <div class="nav-buttons">
+            <a href="index.html" class="btn btn-primary">Unidades de Conservação</a>
+        </div>
+    </header>
+
+    <main class="main-ouvidoria">
+        <div class="banner-ouvidoria">
+            <h2>Ouvidoria</h2>
+            <div class="seletor-container">
+                <label for="unidade">Selecione a unidade de conservação:</label>
+                <select id="unidade" class="select-banner" required>
+                    <option value="" disabled selected>Escolha uma unidade...</option>
+                    <option value="1">Parque Estadual Acaraí</option>
+                    <option value="2">Reserva Biológica Estadual do Aguaí</option>
+                    <option value="3">Parque Estadual das Araucárias</option>
+                    <option value="4">Parque Estadual da Serra do Tabuleiro</option>
+                    <option value="5">Reserva Biológica Estadual da Canela Preta</option>
+                    <option value="6">Parque Estadual Rio Canoas</option>
+                    <option value="7">Parque Estadual Fritz Plaumann</option>
+                    <option value="8">Parque Estadual do Rio Vermelho</option>
+                    <option value="9">Reserva Biológica Estadual dos Sassafrás</option>
+                    <option value="10">Parque Estadual da Serra Furada</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="colunas-ouvidoria">
+            <div class="coluna-form">
+                <h3>Enviar nova comunicação</h3>
+                <form id="form-comunicacao">
+                    <div class="form-group-inline">
+                        <label for="email">E-mail do solicitante:</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    
+                    <div class="form-group-inline">
+                        <label for="titulo">Título da Ocorrência:</label>
+                        <input type="text" id="titulo" required>
+                    </div>
+
+                    <div class="form-group-inline align-top">
+                        <label for="descricao">Descrição detalhada:</label>
+                        <textarea id="descricao" required></textarea>
+                    </div>
+
+                    <div class="form-actions-right">
+                        <button type="submit" class="btn-outline-rounded">Enviar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="coluna-historico">
+                <h3>Histórico de Comunicações</h3>
+                <div id="historico-container">
+                    <p style="color: #666; font-size: 14px;">Carregando histórico do banco de dados...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="academic-footer">
+        <div class="univali-tag">UNIVALI</div>
+        <p>Desenvolvido pelos acadêmicos de Análise e Desenvolvimento de Sistemas - UNIVALI</p>
+        <p>&copy; 2026 Monitor de Unidades de Conservação de SC. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        console.log("LENDO CÓDIGO NOVO - BYPASS CACHE OK!");
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const formComunicacao = document.getElementById('form-comunicacao');
+            const historicoContainer = document.getElementById('historico-container');
+            const selectUnidade = document.getElementById('unidade');
+
+            // 1. Puxa a unidade da URL
+            if (selectUnidade) {
+                const parametrosUrl = new URLSearchParams(window.location.search);
+                const idDaUnidade = parametrosUrl.get('unidade');
+                if (idDaUnidade) selectUnidade.value = idDaUnidade;
+            }
+
+            // 2. Carrega o histórico com as cores blindadas
+            async function carregarHistorico() {
+                if (!historicoContainer) return;
+
+                try {
+                    const resposta = await fetch('http://localhost:3000/api/comunicacao');
+                    const comunicacoes = await resposta.json();
+
+                    historicoContainer.innerHTML = '';
+                    
+                    if (comunicacoes.length === 0) {
+                        historicoContainer.innerHTML = '<p style="font-size:14px; color:#666;">Nenhuma comunicação encontrada.</p>';
+                        return;
+                    }
+
+                    comunicacoes.forEach(item => {
+                        // Se o status vier vazio ou não for 1, será tratado como 0
+                        const statusNumero = (item.status == 1) ? 1 : 0;
+                        
+                        // Define as cores
+                        const textoStatus = statusNumero === 1 ? 'ANALISADA' : 'EM ANÁLISE';
+                        const corFundo = statusNumero === 1 ? '#bbf7d0' : '#fef08a';
+                        const corTexto = statusNumero === 1 ? '#166534' : '#854d0e';
+                        const corBorda = statusNumero === 1 ? '#86efac' : '#fde047';
+
+                        historicoContainer.innerHTML += `
+                            <div class="historico-card">
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px;">
+                                    <div class="historico-card-titulo">${item.titulo}</div>
+                                    <span style="background-color: ${corFundo}; color: ${corTexto}; border: 1px solid ${corBorda}; padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: bold;">
+                                        ${textoStatus}
+                                    </span>
+                                </div>
+                                <span class="historico-card-data">${item.data_formatada}</span>
+                                <div class="historico-card-desc">
+                                    <strong>Descrição:</strong> ${item.descricao}
+                                </div>
+                            </div>
+                        `;
+                    });
+                } catch (erro) {
+                    console.error('Erro ao carregar o histórico:', erro);
+                    historicoContainer.innerHTML = '<p style="color:red; font-size:14px;">Erro ao conectar com o servidor Node.js.</p>';
+                }
+            }
+
+            // 3. Envia o formulário
+            if (formComunicacao) {
+                formComunicacao.addEventListener('submit', async function(event) {
+                    event.preventDefault();
+                    const dados = {
+                        unidade_id: document.getElementById('unidade').value,
+                        email: document.getElementById('email').value,
+                        titulo: document.getElementById('titulo').value,
+                        descricao: document.getElementById('descricao').value
+                    };
+
+                    try {
+                        const resposta = await fetch('http://localhost:3000/api/comunicacao', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(dados)
+                        });
+
+                        if (resposta.ok) {
+                            formComunicacao.reset();
+                            carregarHistorico();
+                        } else {
+                            alert('Erro ao salvar no banco. Verifique o servidor.');
+                        }
+                    } catch (erro) {
+                        alert('Erro ao conectar com a API.');
+                    }
+                });
+            }
+
+            // Inicia tudo
+            carregarHistorico();
+        });
+    </script>
+</body>
+</html>
