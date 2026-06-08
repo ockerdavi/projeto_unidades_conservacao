@@ -88,14 +88,14 @@
             const historicoContainer = document.getElementById('historico-container');
             const selectUnidade = document.getElementById('unidade');
 
-            // 1. Puxa a unidade da URL
+           
             if (selectUnidade) {
                 const parametrosUrl = new URLSearchParams(window.location.search);
                 const idDaUnidade = parametrosUrl.get('unidade');
                 if (idDaUnidade) selectUnidade.value = idDaUnidade;
             }
 
-            // 2. Carrega o histórico com as cores blindadas
+            
             async function carregarHistorico() {
                 if (!historicoContainer) return;
 
@@ -111,10 +111,10 @@
                     }
 
                     comunicacoes.forEach(item => {
-                        // Se o status vier vazio ou não for 1, será tratado como 0
+                        
                         const statusNumero = (item.status == 1) ? 1 : 0;
                         
-                        // Define as cores
+                     
                         const textoStatus = statusNumero === 1 ? 'ANALISADA' : 'EM ANÁLISE';
                         const corFundo = statusNumero === 1 ? '#bbf7d0' : '#fef08a';
                         const corTexto = statusNumero === 1 ? '#166534' : '#854d0e';
@@ -141,7 +141,7 @@
                 }
             }
 
-            // 3. Envia o formulário
+            
             if (formComunicacao) {
                 formComunicacao.addEventListener('submit', async function(event) {
                     event.preventDefault();
@@ -171,7 +171,7 @@
                 });
             }
 
-            // Inicia tudo
+            
             carregarHistorico();
         });
     </script>

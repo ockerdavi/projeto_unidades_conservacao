@@ -6,11 +6,11 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Configuração do Banco de Dados
+// Configuração do Banco
 const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'root', // Sua senha do MySQL
+    password: 'root', //  senha do MySQL
     database: 'ima_conservacao',
     waitForConnections: true,
     connectionLimit: 10,

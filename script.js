@@ -1,40 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- ELEMENTOS DA PÁGINA INICIAL ---
+    
     const gridUnidades = document.getElementById('grid-unidades');
 
-    // --- ELEMENTOS DA PÁGINA DE OUVIDORIA ---
+   
     const formComunicacao = document.getElementById('form-comunicacao');
     const historicoContainer = document.getElementById('historico-container');
-    const selectUnidade = document.getElementById('unidade'); // <-- ADICIONADO: Seleciona o menu suspenso
+    const selectUnidade = document.getElementById('unidade'); 
 
-
-    // ==========================================
-    // NOVO: LER A URL E SELECIONAR A UNIDADE AUTOMATICAMENTE
-    // ==========================================
+    
     if (selectUnidade) {
-        // Pega os parâmetros da URL (ex: ?unidade=4)
+        
         const parametrosUrl = new URLSearchParams(window.location.search);
         const idDaUnidade = parametrosUrl.get('unidade');
 
-        // Se encontrou um número na URL, muda o valor do select
+        
         if (idDaUnidade) {
             selectUnidade.value = idDaUnidade;
         }
     }
 
 
-    // ==========================================
-    // FUNÇÃO 1: CARREGAR CARDS NA PÁGINA INICIAL
-    // ==========================================
+   
     async function carregarCardsUnidades() {
-        if (!gridUnidades) return; // Se não estiver na index.html, ignora
+        if (!gridUnidades) return; 
 
         try {
             const resposta = await fetch('http://localhost:3000/api/unidades-cards');
             const unidades = await resposta.json();
 
-            gridUnidades.innerHTML = ''; // Limpa a mensagem de "Carregando..."
+            gridUnidades.innerHTML = '';
 
             if (unidades.length === 0) {
                 gridUnidades.innerHTML = '<p style="text-align: center; width: 100%;">Nenhuma unidade cadastrada no banco.</p>';
@@ -70,11 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // ==========================================
-    // FUNÇÃO 2: CARREGAR HISTÓRICO DA OUVIDORIA
-    // ==========================================
+    
     async function carregarHistorico() {
-        if (!historicoContainer) return; // Se não estiver na ouvidoria.html, ignora
+        if (!historicoContainer) return; 
 
         try {
             const resposta = await fetch('http://localhost:3000/api/comunicacao');
@@ -104,9 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // ==========================================
-    // FUNÇÃO 3: ENVIAR FORMULÁRIO DE OUVIDORIA
-    // ==========================================
+    
     if (formComunicacao) {
         formComunicacao.addEventListener('submit', async function(event) {
             event.preventDefault(); // Evita recarregar a página
@@ -126,8 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 if (resposta.ok) {
-                    formComunicacao.reset(); // Limpa os campos após enviar
-                    carregarHistorico();     // Recarrega o histórico atualizado
+                    formComunicacao.reset(); 
+                    carregarHistorico();   
                 } else {
                     alert('Erro ao salvar no banco. Verifique o servidor.');
                 }
@@ -137,16 +128,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- INICIALIZAÇÃO DAS FUNÇÕES QUANDO A PÁGINA ABRE ---
+    //INICIALIZAÇÃO DAS FUNÇÕES QUANDO A PÁGINA ABRE:
     carregarCardsUnidades(); 
     carregarHistorico();
 });
 
 comunicacoes.forEach(item => {
-                // Força o status para 0 se vier vazio, garantindo que não quebre
+                
                 const statusNumero = (item.status == 1) ? 1 : 0;
                 
-                // Define as variáveis de texto e cores diretamente no JS
+              
                 const textoStatus = statusNumero === 1 ? 'ANALISADA' : 'EM ANÁLISE';
                 const corFundo = statusNumero === 1 ? '#bbf7d0' : '#fef08a';
                 const corTexto = statusNumero === 1 ? '#166534' : '#854d0e';
